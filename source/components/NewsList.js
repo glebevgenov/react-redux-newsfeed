@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import News from './News';
 import NewsUtils from '../utils/NewsUtils';
-import CollectionActionCreators from '../actions/CollectionActionCreators';
+import { removeNewsFromCollection } from '../actions';
 
 const listStyle = {
     padding: '0'
@@ -14,17 +15,13 @@ const listItemStyle = {
 
 class NewsList extends Component {
 
-    removeNewsFromCollection = news => {
-        CollectionActionCreators.removeNewsFromCollection(news.id);
-    };
-
     getNewsElement = (newsId) => {
-        const { nl } = this.props;
+        const { nl, onRemoveNewsFromCollection } = this.props;
         const news = nl[newsId];
         const newsElement = (
             <News
                 news={news}
-                onClick={this.removeNewsFromCollection}
+                onClick={onRemoveNewsFromCollection}
             />
         );
 
@@ -49,4 +46,13 @@ class NewsList extends Component {
     }
 }
 
-export default NewsList;
+const mapStateToProps = null;
+const mapDispatchToProps = dispatch => ({
+    onRemoveNewsFromCollection: ({ id }) => {
+        dispatch(removeNewsFromCollection(id));
+    }
+});
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewsList);

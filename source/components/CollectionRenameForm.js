@@ -1,42 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Header from './Header';
 import Button from './Button';
-import CollectionActionCreators from '../actions/CollectionActionCreators';
-import CollectionStore from '../stores/CollectionStore';
+import { setName, toggleIsEditingName, setEditingName } from '../actions';
 
 class CollectionRenameForm extends Component {
 
-    state = {
-        inputValue: CollectionStore.getCollectionName()
-    };
-
-    setInputValue = (inputValue) => {
-        this.setState({
-            inputValue
-        });
-    };
+    setInputValue(inputValue) {
+        const { onInputValueChange } = this.props;
+        onInputValueChange(inputValue);
+    }
 
     handleInputValueChange = (event) => {
-        const inputValue = event.target.value;
-        this.setInputValue(inputValue);
+        this.setInputValue(event.target.value);
     };
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-        const { onCancelCollectionNameChange } = this.props;
-        const { inputValue: collectionName } = this.state;
-        CollectionActionCreators.setCollectionName(collectionName);
-        onCancelCollectionNameChange();
+        const { editingName, onFormSubmit } = this.props;
+        onFormSubmit(editingName);
     };
 
     handleFormCancel = (event) => {
         event.preventDefault();
-        const {
-            onCancelCollectionNameChange
-        } = this.props;
-        const collectionName = CollectionStore.getCollectionName();
-        this.setInputValue(collectionName);
-        onCancelCollectionNameChange();
+        const { name, onFormCancel } = this.props;
+        this.setInputValue(name);
+        onFormCancel();
     };
 
     componentDidMount() {
@@ -44,7 +33,7 @@ class CollectionRenameForm extends Component {
     }
 
     render() {
-        const { inputValue } = this.state;
+        const { editingName } = this.props;
         return (
             <form className="form-inline" onSubmit={this.handleFormSubmit}>
                 <Header text="Collection name:"/>
@@ -52,7 +41,7 @@ class CollectionRenameForm extends Component {
                     <input
                         className="form-control mr-2"
                         onChange={this.handleInputValueChange}
-                        value={inputValue}
+                        value={editingName}
                         ref={input => { this.collectionNameInput = input; }}
                     />
                 </div>
@@ -68,5 +57,14 @@ class CollectionRenameForm extends Component {
         );
     }
 }
+const mapStateToProps = state => state.collection;
+const mapDispatchToProps = dispatch => ({
+    onInputValueChange: (inputValue) => dispatch(setEditingName(inputValue)),
+    onFormSubmit: (name) => dispatch(setName(name)),
+    onFormCancel: () => dispatch(toggleIsEditingName()),
+});
 
-export default CollectionRenameForm;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CollectionRenameForm);

@@ -27,14 +27,14 @@ class News extends React.Component {
 
     handleClick = () => {
         const { news, onClick } = this.props;
-
         if (onClick) {
             onClick(news);
         }
     };
 
     render() {
-        const { title, url, media } = this.props.news;
+        const { news } = this.props;
+        const { title, url, media } = news;
         const mediaUrl = media[0].url;
         return (
             <div onClick={this.handleClick} style={newsStyle} className="card text-left">

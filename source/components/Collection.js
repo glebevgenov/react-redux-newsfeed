@@ -1,36 +1,22 @@
 import React, { Component } from 'react';
 import * as ReactDOMServer from 'react-dom/server';
+import { connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import CollectionControls from './CollectionControls';
 import NewsList from './NewsList';
 import Header from './Header';
 import CollectionUtils from '../utils/CollectionUtils';
-import CollectionStore from '../stores/CollectionStore';
+import store from '../stores';
 
 
 class Collection extends Component {
 
-    state = {
-        nl: CollectionStore.getCollectionNl()
-    };
-
-    componentDidMount() {
-        CollectionStore.addChangeListener(this.onCollectionChange);
-    }
-
-    componentWillUnmount() {
-        CollectionStore.removeChangeListener(this.onCollectionChange);
-    }
-
-    onCollectionChange = () => {
-        this.setState({
-            nl: CollectionStore.getCollectionNl()
-        });
-    };
-
     createHtmlMarkupStringOfNewsList = () => {
-        const { nl } = this.state;
+        const { nl } = this.props;
         const htmlString = ReactDOMServer.renderToStaticMarkup(
-            <NewsList nl={nl}/>
+            <Provider store={store}>
+                <NewsList nl={nl}/>
+            </Provider>
         );
         const htmlMarkup = {
             html: htmlString,
@@ -40,7 +26,7 @@ class Collection extends Component {
     };
 
     render() {
-        const { nl } = this.state;
+        const { nl } = this.props;
         const numberOfNewsInCollection = CollectionUtils.getNumberOfNewsInCollection(nl);
 
         if (numberOfNewsInCollection > 0) {
@@ -59,4 +45,10 @@ class Collection extends Component {
     }
 }
 
-export default Collection;
+const mapStateToProps = state => state.collection;
+const mapDispatchToProps = null;
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Collection);

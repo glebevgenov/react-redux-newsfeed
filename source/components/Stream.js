@@ -1,35 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import StreamNews from './StreamNews';
 import Header from './Header';
-import NewsStore from '../stores/NewsStore';
 
 class Stream extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            news: NewsStore.getNews(),
-        };
-        console.log('Stream constructor');
-    }
-
-    componentDidMount() {
-        NewsStore.addChangeListener(this.onNewsChange);
-    }
-
-    componentWillUnmount() {
-        NewsStore.removeChangeListener(this.onNewsChange);
-    }
-
-    onNewsChange = () => {
-        this.setState({
-            news: NewsStore.getNews()
-        });
-    };
-
     render() {
-        const { news } = this.state;
+        const { news } = this.props;
         const headerText = 'Waiting for public news...';
 
         if (news) {
@@ -44,4 +21,10 @@ class Stream extends Component {
     }
 }
 
-export default Stream;
+const mapStateToProps = news => news;
+const mapDispatchToProps = null;
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Stream);

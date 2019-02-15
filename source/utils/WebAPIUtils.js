@@ -1,9 +1,9 @@
 import NewsStream from '../services/NewsStream';
-import { receiveNews } from '../actions/NewsActionCreators';
+import { receiveNews } from '../actions';
 
-function initializeStreamOfNews() {
+function initializeStreamOfNews(store) {
     const ns = new NewsStream();
-    ns.on('news', receiveNews);
+    ns.on('news', (news) => { store.dispatch(receiveNews(news)) });
     const initPromise = new Promise((resolve) => {
         ns.once('news', () => {
            resolve();

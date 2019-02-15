@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Header from './Header';
 import Button from './Button';
 import CollectionRenameForm from './CollectionRenameForm';
 import CollectionExportForm from './CollectionExportForm';
-import CollectionActionCreators from '../actions/CollectionActionCreators';
-import CollectionStore from '../stores/CollectionStore';
+import { toggleIsEditingName, removeAllNewsFromCollection } from '../actions';
 
 class CollectionControls extends Component {
 
-    state = {
-        isEditingName: false
-    };
-
     getHeaderText = () => {
-        const name = CollectionStore.getCollectionName();
+        const { name } = this.props;
         const { numberOfNewsInCollection } = this.props;
         let text = numberOfNewsInCollection;
 
@@ -30,26 +26,18 @@ class CollectionControls extends Component {
         );
     };
 
-    toggleEditCollectionName = () => {
-        this.setState(prevState => ({
-            isEditingName: !prevState.isEditingName
-        }));
-    };
-
-    removeAllNewsFromCollection = () => {
-        CollectionActionCreators.removeAllNewsFromCollection();
-    };
-
     render() {
-        const { name, isEditingName } = this.state;
-        const { htmlMarkup } = this.props;
+        const {
+            name,
+            isEditingName,
+            htmlMarkup,
+            onRenameCollection,
+            onEmptyCollection,
+        } = this.props;
 
         if (isEditingName) {
             return (
-                <CollectionRenameForm
-                    name={name}
-                    onCancelCollectionNameChange={this.toggleEditCollectionName}
-                />
+                <CollectionRenameForm name={name} />
             );
         }
 
@@ -59,12 +47,12 @@ class CollectionControls extends Component {
 
                 <Button
                     label="Rename collection"
-                    handleClick={this.toggleEditCollectionName}
+                    handleClick={onRenameCollection}
                 />
 
                 <Button
                     label="Empty collection"
-                    handleClick={this.removeAllNewsFromCollection}
+                    handleClick={onEmptyCollection}
                 />
 
                 <CollectionExportForm htmlMarkup={htmlMarkup} />
@@ -73,4 +61,17 @@ class CollectionControls extends Component {
     }
 }
 
-export default CollectionControls;
+const mapStateToProps = state => state.collection;
+const mapDispatchToProps = dispatch => ({
+    onRenameCollection: () => {
+        dispatch(toggleIsEditingName());
+    },
+    onEmptyCollection: () => {
+        dispatch(removeAllNewsFromCollection());
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CollectionControls);
