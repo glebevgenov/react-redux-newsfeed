@@ -1,9 +1,14 @@
 import React from 'react';
 import * as ReactDOM from 'react-dom';
 import Application from './components/Application';
+import { initializeStreamOfNews } from './utils/WebAPIUtils';
 
-ReactDOM.render(
-    <Application />,
-    document.getElementById('react-application')
-);
+(async () => {
 
+    await initializeStreamOfNews();
+
+    ReactDOM.render(
+        <Application />,
+        document.getElementById('react-application')
+    );
+})();

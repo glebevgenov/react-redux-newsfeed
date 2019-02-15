@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import NewsStream from '../services/NewsStream';
 import StreamNews from './StreamNews';
 import Header from './Header';
+import NewsStore from '../stores/NewsStore';
 
 class Stream extends Component {
 
@@ -9,44 +9,37 @@ class Stream extends Component {
         super(props);
 
         this.state = {
-            news: null
+            news: NewsStore.getNews(),
         };
+        console.log('Stream constructor');
     }
 
     componentDidMount() {
-        this.ns = new NewsStream();
-        this.ns.on('news', this.handleLatestNews);
-        this.ns.start();
+        NewsStore.addChangeListener(this.onNewsChange);
     }
 
     componentWillUnmount() {
-        this.ns.stop();
-        delete this.ns;
+        NewsStore.removeChangeListener(this.onNewsChange);
     }
 
-    handleLatestNews = (news) => {
+    onNewsChange = () => {
         this.setState({
-            news: news
+            tweet: NewsStore.getNews()
         });
     };
 
     render() {
         const { news } = this.state;
-        const { onAddNewsToCollection } = this.props;
         const headerText = 'Waiting for public news...';
 
         if (news) {
             return (
-                <StreamNews
-                    news={news}
-                    onAddNewsToCollection={onAddNewsToCollection}
-                />
+                <StreamNews news={news} />
             );
         }
 
         return (
-            <Header
-                text={headerText}/>
+            <Header text={headerText} />
         );
     }
 }
