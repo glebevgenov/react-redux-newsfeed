@@ -12,12 +12,32 @@ function getNewsId(source, title, datetime) {
 }
 
 /**
- * @returns {Promise<Object>}
+ * @typedef {{
+ *      source: Object,
+ *      title: string,
+ *      publishedAt: string,
+ *      description: string,
+ *      url: string,
+ *      urlToImage: string,
+ * }} Article
+ */
+
+/**
+ * @typedef {{
+ *      id: string,
+ *      title: string,
+ *      text: string,
+ *      url: string,
+ *      media: Object[],
+ * }} News
+ */
+
+/**
+ * @returns {Promise<News>}
  */
 async function getLatestNews() {
     /**
-     * @type {Object}
-     * @property {Array<Object>} articles
+     * @property {Article[]} articles
      */
     const res = await NewsAPI.v2.topHeadlines({
         pageSize: 1,
@@ -26,18 +46,9 @@ async function getLatestNews() {
     });
 
     if (!res.articles.length) {
-        return false;
+        return null;
     }
 
-    /**
-     * @type {Object}
-     * @property {Object} source
-     * @property {string} title
-     * @property {string} publishedAt
-     * @property {string} description
-     * @property {string} url
-     * @property {string} urlToImage
-     */
     const article = res.articles[0];
     const newsId = getNewsId(article.source.id, article.title, article.publishedAt);
     return {

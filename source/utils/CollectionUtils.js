@@ -1,8 +1,7 @@
 import NewsUtils from './NewsUtils';
 
-function getNumberOfNewsInCollection(collection) {
-    const listOfCollectionNewsIds = NewsUtils
-        .getListOfNewsIds(collection);
+function getNumberOfNewsInCollection(nl) {
+    const listOfCollectionNewsIds = NewsUtils.getListOfNewsIds(nl);
     return listOfCollectionNewsIds.length;
 }
 

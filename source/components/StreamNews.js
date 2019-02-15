@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as ReactDOM from 'react-dom';
 import Header from './Header';
 import News from './News';
+import CollectionActionCreators from '../actions/CollectionActionCreators';
 
 class StreamNews extends Component {
 
@@ -9,6 +10,10 @@ class StreamNews extends Component {
         super(props);
         this.ref = React.createRef();
     }
+
+    addNewsToCollection = news => {
+        CollectionActionCreators.addNewsToCollection(news);
+    };
 
     componentWillMount() {
         console.log('[Newsfeed] StreamNews: 1. Running componentWillMount()');
@@ -70,14 +75,14 @@ class StreamNews extends Component {
     render() {
         console.log('[Newsfeed] StreamNews: Running render()');
         const { headerText } = this.state;
-        const { news, onAddNewsToCollection } = this.props;
+        const { news } = this.props;
 
         return (
             <section ref={this.ref}>
                 <Header text={headerText} />
                 <News
                     news={news}
-                    onClick={onAddNewsToCollection}
+                    onClick={this.addNewsToCollection}
                 />
             </section>
         );

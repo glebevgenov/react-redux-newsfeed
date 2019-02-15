@@ -24,7 +24,7 @@ class Stream extends Component {
 
     onNewsChange = () => {
         this.setState({
-            tweet: NewsStore.getNews()
+            news: NewsStore.getNews()
         });
     };
 

@@ -3,18 +3,18 @@ import Header from './Header';
 import Button from './Button';
 import CollectionRenameForm from './CollectionRenameForm';
 import CollectionExportForm from './CollectionExportForm';
+import CollectionActionCreators from '../actions/CollectionActionCreators';
+import CollectionStore from '../stores/CollectionStore';
 
 class CollectionControls extends Component {
 
     state = {
-        name: 'new',
         isEditingName: false
     };
 
     getHeaderText = () => {
-        const { name } = this.state;
+        const name = CollectionStore.getCollectionName();
         const { numberOfNewsInCollection } = this.props;
-
         let text = numberOfNewsInCollection;
 
         if (numberOfNewsInCollection === 1) {
@@ -36,25 +36,18 @@ class CollectionControls extends Component {
         }));
     };
 
-    setCollectionName = (name) => {
-        this.setState({
-            name,
-            isEditingName: false
-        });
+    removeAllNewsFromCollection = () => {
+        CollectionActionCreators.removeAllNewsFromCollection();
     };
 
     render() {
         const { name, isEditingName } = this.state;
-        const {
-            onRemoveAllNewsFromCollection,
-            htmlMarkup,
-        } = this.props;
+        const { htmlMarkup } = this.props;
 
         if (isEditingName) {
             return (
                 <CollectionRenameForm
                     name={name}
-                    onChangeCollectionName={this.setCollectionName}
                     onCancelCollectionNameChange={this.toggleEditCollectionName}
                 />
             );
@@ -71,7 +64,7 @@ class CollectionControls extends Component {
 
                 <Button
                     label="Empty collection"
-                    handleClick={onRemoveAllNewsFromCollection}
+                    handleClick={this.removeAllNewsFromCollection}
                 />
 
                 <CollectionExportForm htmlMarkup={htmlMarkup} />

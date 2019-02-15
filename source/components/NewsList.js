@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import News from './News';
 import NewsUtils from '../utils/NewsUtils';
+import CollectionActionCreators from '../actions/CollectionActionCreators';
 
 const listStyle = {
     padding: '0'
@@ -13,21 +14,19 @@ const listItemStyle = {
 
 class NewsList extends Component {
 
-    getNewsElement = (newsId) => {
-        const { nl, onRemoveNewsFromCollection } = this.props;
-        const news = nl[newsId];
-        let newsElement;
+    removeNewsFromCollection = news => {
+        CollectionActionCreators.removeNewsFromCollection(news.id);
+    };
 
-        if (onRemoveNewsFromCollection) {
-            newsElement = (
-                <News
-                    news={news}
-                    onClick={onRemoveNewsFromCollection}
-                />
-            );
-        } else {
-            newsElement = <News news={news}/>;
-        }
+    getNewsElement = (newsId) => {
+        const { nl } = this.props;
+        const news = nl[newsId];
+        const newsElement = (
+            <News
+                news={news}
+                onClick={this.removeNewsFromCollection}
+            />
+        );
 
         return (
             <li style={listItemStyle} className="align-top" key={news.id}>

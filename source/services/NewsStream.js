@@ -22,7 +22,7 @@ class NewsStream extends EventEmitter {
     _tick = async () => {
         if (this.listenerCount('news') > 0) {
             const news = await NewsStreamUtils.getLatestNews();
-            if (this._newsId !== news.id) {
+            if (news && this._newsId !== news.id) {
                 this._newsId = news.id;
                 this.emit('news', news);
             }
