@@ -1,7 +1,6 @@
 const initialState = {
     nl: {},
     name: 'new',
-    editingName: 'new',
 };
 
 export default (state = initialState, action) => {
@@ -40,7 +39,8 @@ export default (state = initialState, action) => {
         case 'toggle_is_editing_name':
             return {
                 ...state,
-                isEditingName: !state.isEditingName
+                isEditingName: !state.isEditingName,
+                editingName: state.name,
             };
         case 'set_editing_name':
             return {

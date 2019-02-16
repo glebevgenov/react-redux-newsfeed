@@ -1,6 +1,8 @@
 import EventEmitter from 'events';
 import NewsStreamUtils from './NewsStreamUtils';
 
+const NEWS_TIMEOUT = 15000;
+
 class NewsStream extends EventEmitter {
 
     _newsId = null;
@@ -27,7 +29,7 @@ class NewsStream extends EventEmitter {
                 this.emit('news', news);
             }
         }
-        this._timerId = setTimeout(this._tick, 15000);
+        this._timerId = setTimeout(this._tick, NEWS_TIMEOUT);
     };
 }
 

@@ -6,62 +6,51 @@ import { setName, toggleIsEditingName, setEditingName } from '../actions';
 
 class CollectionRenameForm extends Component {
 
-    setInputValue(inputValue) {
-        const { onInputValueChange } = this.props;
-        onInputValueChange(inputValue);
-    }
-
-    handleInputValueChange = (event) => {
-        this.setInputValue(event.target.value);
-    };
-
-    handleFormSubmit = (event) => {
-        event.preventDefault();
-        const { editingName, onFormSubmit } = this.props;
-        onFormSubmit(editingName);
-    };
-
-    handleFormCancel = (event) => {
-        event.preventDefault();
-        const { name, onFormCancel } = this.props;
-        this.setInputValue(name);
-        onFormCancel();
-    };
-
     componentDidMount() {
         this.collectionNameInput.focus();
     }
 
     render() {
-        const { editingName } = this.props;
+        const {
+            editingName,
+            onInput,
+            onSubmit,
+            onCancel
+        } = this.props;
         return (
-            <form className="form-inline" onSubmit={this.handleFormSubmit}>
+            <form className="form-inline" onSubmit={onSubmit}>
                 <Header text="Collection name:"/>
                 <div className="form-group">
                     <input
                         className="form-control mr-2"
-                        onChange={this.handleInputValueChange}
+                        onChange={onInput}
                         value={editingName}
                         ref={input => { this.collectionNameInput = input; }}
                     />
                 </div>
                 <Button
                     label="Change"
-                    handleClick={this.handleFormSubmit}
+                    handleClick={onSubmit}
                 />
                 <Button
                     label="Cancel"
-                    handleClick={this.handleFormCancel}
+                    handleClick={onCancel}
                 />
             </form>
         );
     }
 }
 const mapStateToProps = state => state.collection;
-const mapDispatchToProps = dispatch => ({
-    onInputValueChange: (inputValue) => dispatch(setEditingName(inputValue)),
-    onFormSubmit: (name) => dispatch(setName(name)),
-    onFormCancel: () => dispatch(toggleIsEditingName()),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    onInput: (event) => dispatch(setEditingName(event.target.value)),
+    onSubmit: (event) => {
+        event.preventDefault();
+        dispatch(setName(ownProps.editingName));
+    },
+    onCancel: (event) => {
+        event.preventDefault();
+        dispatch(toggleIsEditingName());
+    },
 });
 
 export default connect(

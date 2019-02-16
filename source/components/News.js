@@ -10,7 +10,8 @@ const newsStyle = {
 };
 
 const imageStyle = {
-    maxHeight: '300px',
+    objectFit: 'cover',
+    maxHeight: '200px',
     width: '100%',
 };
 
@@ -25,9 +26,9 @@ const linkStyle = {
 
 class News extends React.Component {
 
-    handleClick = () => {
+    handleClick = (event) => {
         const { news, onClick } = this.props;
-        if (onClick) {
+        if (event.target.tagName.toLowerCase() !== 'a' && onClick) {
             onClick(news);
         }
     };
@@ -45,7 +46,12 @@ class News extends React.Component {
                 />
                 <div className="card-body">
                     <h6 style={titleStyle} className="card-title">{title}</h6>
-                    <a href={url} style={linkStyle} className="btn btn-primary mb-3">Go to news</a>
+                    <a
+                        style={linkStyle}
+                        className="btn btn-primary mb-3"
+                        href={url}
+                        target="_blank"
+                    >Go to news</a>
                 </div>
             </div>
         );

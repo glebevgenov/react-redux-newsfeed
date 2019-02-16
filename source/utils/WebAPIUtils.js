@@ -1,4 +1,4 @@
-import NewsStream from '../services/NewsStream';
+import NewsStream from '../api/NewsStream';
 import { receiveNews } from '../actions';
 
 function initializeStreamOfNews(store) {

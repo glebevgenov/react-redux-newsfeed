@@ -11,7 +11,7 @@ import store from '../stores';
 
 class Collection extends Component {
 
-    createHtmlMarkupStringOfNewsList = () => {
+    createHtmlMarkup = () => {
         const { nl } = this.props;
         const htmlString = ReactDOMServer.renderToStaticMarkup(
             <Provider store={store}>
@@ -30,7 +30,7 @@ class Collection extends Component {
         const numberOfNewsInCollection = CollectionUtils.getNumberOfNewsInCollection(nl);
 
         if (numberOfNewsInCollection > 0) {
-            const htmlMarkup = this.createHtmlMarkupStringOfNewsList();
+            const htmlMarkup = this.createHtmlMarkup();
             return (
                 <div>
                     <CollectionControls
