@@ -4,7 +4,7 @@ import Header from './Header';
 import Button from './Button';
 import CollectionRenameForm from './CollectionRenameForm';
 import CollectionExportForm from './CollectionExportForm';
-import { toggleIsEditingName, removeAllNewsFromCollection } from '../actions';
+import { toggleIsEditingName, removeAllNewsFromCollection } from '../redux/actions';
 
 class CollectionControls extends Component {
 

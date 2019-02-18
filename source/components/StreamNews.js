@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './Header';
 import News from './News';
-import { addNewsToCollection } from '../actions';
+import { addNewsToCollection } from '../redux/actions';
 
 class StreamNews extends Component {
 

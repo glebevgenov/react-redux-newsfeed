@@ -1,5 +1,5 @@
 import NewsStream from '../api/NewsStream';
-import { receiveNews } from '../actions';
+import { receiveNews } from '../redux/actions';
 
 function initializeStreamOfNews(store) {
     const ns = new NewsStream();

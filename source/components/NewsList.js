@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import News from './News';
 import NewsUtils from '../utils/NewsUtils';
-import { removeNewsFromCollection } from '../actions';
+import { removeNewsFromCollection } from '../redux/actions';
 
 const listStyle = {
     padding: '0'

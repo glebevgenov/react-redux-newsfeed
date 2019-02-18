@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Application from './components/Application';
 import { initializeStreamOfNews } from './utils/WebAPIUtils';
-import store from './stores';
+import store from './redux/store';
 
 (async () => {
 

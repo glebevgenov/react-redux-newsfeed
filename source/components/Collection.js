@@ -6,7 +6,7 @@ import CollectionControls from './CollectionControls';
 import NewsList from './NewsList';
 import Header from './Header';
 import CollectionUtils from '../utils/CollectionUtils';
-import store from '../stores';
+import store from '../redux/store';
 
 
 class Collection extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Button from './Button';
-import { setName, toggleIsEditingName, setEditingName } from '../actions';
+import { setName, toggleIsEditingName, setEditingName } from '../redux/actions';
 
 class CollectionRenameForm extends Component {
 
