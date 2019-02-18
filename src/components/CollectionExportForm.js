@@ -1,15 +1,12 @@
 import React from 'react';
-
-const formStyle = {
-    display: 'inline-block'
-};
+import './CollectionExportForm.css';
 
 const CollectionExportForm = ({ htmlMarkup }) => (
     <form
         action="https://codepen.io/pen/define"
         method="POST"
         target="_blank"
-        style={formStyle}
+        className="CollectionExportForm"
     >
         <input type="hidden" name="data" value={htmlMarkup}/>
         <button type="submit" className="btn btn-primary mr-2">

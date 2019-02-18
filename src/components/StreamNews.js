@@ -11,7 +11,7 @@ class StreamNews extends Component {
 
         return (
             <section>
-                <Header text="Latest public photo from Twitter" />
+                <Header text="Latest public photo from NewsAPI" />
                 <News
                     news={news}
                     onClick={onNewsClick}

@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './NewsList.css';
 import News from './News';
 import NewsUtils from '../utils/NewsUtils';
 import { removeNewsFromCollection } from '../redux/actions';
-
-const listStyle = {
-    padding: '0'
-};
-
-const listItemStyle = {
-    display: 'inline-block',
-    listStyle: 'none'
-};
 
 class NewsList extends Component {
 
@@ -26,7 +18,7 @@ class NewsList extends Component {
         );
 
         return (
-            <li style={listItemStyle} className="align-top" key={news.id}>
+            <li className="NewsList__item align-top" key={news.id}>
                 {newsElement}
             </li>
         );
@@ -39,7 +31,7 @@ class NewsList extends Component {
             .map(this.getNewsElement);
 
         return (
-            <ul style={listStyle}>
+            <ul className="NewsList">
                 {newsElements}
             </ul>
         );
@@ -52,6 +44,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(removeNewsFromCollection(id));
     }
 });
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps

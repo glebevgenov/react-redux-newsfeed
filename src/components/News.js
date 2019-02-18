@@ -1,28 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-
-const newsStyle = {
-    position: 'relative',
-    display: 'inline-block',
-    width: '300px',
-    height: '400px',
-    margin: '10px'
-};
-
-const imageStyle = {
-    objectFit: 'cover',
-    maxHeight: '200px',
-    width: '100%',
-};
-
-const titleStyle = {
-    maxHeight: '200px',
-};
-
-const linkStyle = {
-    position: 'absolute',
-    bottom: 0,
-};
+import './News.css';
 
 class News extends React.Component {
 
@@ -38,19 +16,19 @@ class News extends React.Component {
         const { title, url, media } = news;
         const mediaUrl = media[0].url;
         return (
-            <div onClick={this.handleClick} style={newsStyle} className="card text-left">
+            <div onClick={this.handleClick} className="News card text-left">
                 <img
-                    alt="No image"
+                    alt={title}
                     src={mediaUrl}
-                    style={imageStyle}
+                    className="News__image"
                 />
                 <div className="card-body">
-                    <h6 style={titleStyle} className="card-title">{title}</h6>
+                    <h6 className="News__title card-title">{title}</h6>
                     <a
-                        style={linkStyle}
-                        className="btn btn-primary mb-3"
+                        className="News__link btn btn-primary mb-3"
                         href={url}
                         target="_blank"
+                        rel="noopener noreferrer"
                     >Go to news</a>
                 </div>
             </div>
@@ -68,7 +46,7 @@ News.propTypes = {
             return new Error('News must have an image.');
         }
     },
-    onImageClick: PropTypes.func
+    onClick: PropTypes.func
 };
 
 export default News;

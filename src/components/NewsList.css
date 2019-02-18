@@ -1,0 +1,8 @@
+.NewsList {
+    padding: 0;
+}
+
+.NewsList__item {
+    display: inline-block;
+    list-style: 'none';
+}
