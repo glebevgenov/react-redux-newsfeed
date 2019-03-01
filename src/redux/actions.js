@@ -3,18 +3,17 @@ export const addNewsToCollection = news => ({
     news
 });
 
-export const removeNewsFromCollection = newsId => ({
+export const removeNewsFromCollection = id => ({
     type: 'remove_news_from_collection',
-    newsId
+    id
 });
 
 export const removeAllNewsFromCollection = () => ({
     type: 'remove_all_news_from_collection'
 });
 
-export const setName = name => ({
+export const setName = () => ({
     type: 'set_name',
-    name
 });
 
 export const toggleIsEditingName = () => ({

@@ -1,53 +1,30 @@
-const initialState = {
-    nl: {},
-    name: 'new',
-};
+import produce from "immer";
 
-export default (state = initialState, action) => {
-    let news;
-    let nl;
-    switch (action.type) {
-        case 'add_news_to_collection':
-            news = {};
-            news[action.news.id] = action.news;
-            return {
-                ...state,
-                nl: {
-                    ...state.nl,
-                    ...news
-                }
-            };
-        case 'remove_news_from_collection':
-            nl = { ...state.nl };
-            delete nl[action.newsId];
-            return {
-                ...state,
-                nl
-            };
-        case 'remove_all_news_from_collection':
-            nl = {};
-            return {
-                ...state,
-                nl
-            };
-        case 'set_name':
-            return {
-                ...state,
-                name: state.editingName,
-                isEditingName: false
-            };
-        case 'toggle_is_editing_name':
-            return {
-                ...state,
-                isEditingName: !state.isEditingName,
-                editingName: state.name,
-            };
-        case 'set_editing_name':
-            return {
-                ...state,
-                editingName: action.editingName
-            };
-        default:
-            return state;
-    }
+export default (state = null, action) => {
+    return produce(state, draft => {
+        switch (action.type) {
+            case 'add_news_to_collection':
+                draft.newsList[action.id] = action.news;
+                break;
+            case 'remove_news_from_collection':
+                delete draft.newsList[action.id];
+                break;
+            case 'remove_all_news_from_collection':
+                draft.newsList = {};
+                break;
+            case 'set_name':
+                draft.name = draft.editingName;
+                draft.isEditingName = false;
+                break;
+            case 'toggle_is_editing_name':
+                draft.isEditingName = !draft.isEditingName;
+                draft.editingName = draft.name;
+                break;
+            case 'set_editing_name':
+                draft.editingName = action.editingName;
+                break;
+            default: 
+                return state;
+        }
+    });
 };

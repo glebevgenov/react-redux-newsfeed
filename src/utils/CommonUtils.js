@@ -1,7 +1,7 @@
 import NewsStream from '../api/NewsStream';
 import { receiveNews } from '../redux/actions';
 
-function initializeStreamOfNews(store) {
+export const initializeStreamOfNews = (store) => {
     const ns = new NewsStream();
     ns.on('news', (news) => { store.dispatch(receiveNews(news)) });
     const initPromise = new Promise((resolve) => {
@@ -12,5 +12,3 @@ function initializeStreamOfNews(store) {
     ns.start();
     return initPromise;
 }
-
-export { initializeStreamOfNews };

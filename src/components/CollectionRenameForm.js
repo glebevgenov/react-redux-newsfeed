@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from './Header';
 import Button from './Button';
 import { setName, toggleIsEditingName, setEditingName } from '../redux/actions';
 
@@ -14,40 +13,51 @@ class CollectionRenameForm extends Component {
         const {
             editingName,
             onInput,
-            onSubmit,
-            onCancel
+            onInputKeyPress,
+            onChangeClick,
+            onCancelClick
         } = this.props;
         return (
-            <form className="form-inline" onSubmit={onSubmit}>
-                <Header text="Collection name:"/>
-                <div className="form-group">
+            <div className="row mx-n2">
+                <div className="col-md-4 px-2">
                     <input
-                        className="form-control mr-2"
+                        className="form-control"
                         onChange={onInput}
+                        onKeyPress={onInputKeyPress}
                         value={editingName}
                         ref={input => { this.collectionNameInput = input; }}
                     />
                 </div>
-                <Button
-                    label="Change"
-                    handleClick={onSubmit}
-                />
-                <Button
-                    label="Cancel"
-                    handleClick={onCancel}
-                />
-            </form>
+                <div className="col-md-4 px-2">
+                    <Button
+                        label="Change"
+                        handleClick={onChangeClick}
+                    />
+                </div>
+                <div className="col-md-4 px-2">
+                    <Button
+                        label="Cancel"
+                        handleClick={onCancelClick}
+                    />
+                </div>
+            </div>                    
         );
     }
 }
+
 const mapStateToProps = state => state.collection;
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
     onInput: (event) => dispatch(setEditingName(event.target.value)),
-    onSubmit: (event) => {
-        event.preventDefault();
-        dispatch(setName(ownProps.editingName));
+    onInputKeyPress: (event) => {
+        if (event.key === 'Enter') {
+            dispatch(setName());
+        } 
     },
-    onCancel: (event) => {
+    onChangeClick: (event) => {
+        event.preventDefault();
+        dispatch(setName());
+    },
+    onCancelClick: (event) => {
         event.preventDefault();
         dispatch(toggleIsEditingName());
     },

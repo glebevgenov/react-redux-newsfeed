@@ -1,8 +1,7 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import './News.css';
 
-class News extends React.Component {
+class News extends Component {
 
     handleClick = (event) => {
         const { news, onClick } = this.props;
@@ -16,16 +15,16 @@ class News extends React.Component {
         const { title, url, media } = news;
         const mediaUrl = media[0].url;
         return (
-            <div onClick={this.handleClick} className="News card text-left">
+            <div onClick={this.handleClick} className="News card d-flex text-left">
                 <img
                     alt={title}
                     src={mediaUrl}
                     className="News__image"
                 />
                 <div className="card-body">
-                    <h6 className="News__title card-title">{title}</h6>
+                    <div className="News__title card-title">{title}</div>
                     <a
-                        className="News__link btn btn-primary mb-3"
+                        className="btn btn-primary"
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -35,18 +34,5 @@ class News extends React.Component {
         );
     }
 }
-
-News.propTypes = {
-    news: (properties, propertyName) => {
-        const news = properties[propertyName];
-        if (!news) {
-            return new Error('News must be set.');
-        }
-        if (!news.media) {
-            return new Error('News must have an image.');
-        }
-    },
-    onClick: PropTypes.func
-};
 
 export default News;
