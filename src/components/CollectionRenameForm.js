@@ -30,13 +30,13 @@ class CollectionRenameForm extends Component {
                 </div>
                 <div className="col-md-4 px-2">
                     <Button
-                        label="Change"
+                        label="Изменить"
                         handleClick={onChangeClick}
                     />
                 </div>
                 <div className="col-md-4 px-2">
                     <Button
-                        label="Cancel"
+                        label="Отмена"
                         handleClick={onCancelClick}
                     />
                 </div>

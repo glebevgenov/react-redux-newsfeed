@@ -4,7 +4,7 @@ import reducers from './reducers';
 const initialState = {
     collection: {
         newsList: {},
-        name: 'New Collection',
+        name: 'Новая лента',
     },
     news: null,
 };

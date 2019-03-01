@@ -41,8 +41,8 @@ async function getLatestNews() {
      */
     const res = await NewsAPI.v2.topHeadlines({
         pageSize: 1,
-        language: 'en',
-        country: 'us',
+        language: 'ru',
+        country: 'ru',
     });
 
     if (!res.articles.length) {

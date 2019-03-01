@@ -28,7 +28,7 @@ class News extends Component {
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                    >Go to news</a>
+                    >Перейти</a>
                 </div>
             </div>
         );

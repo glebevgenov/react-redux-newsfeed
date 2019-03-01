@@ -21,13 +21,13 @@ const CollectionControls = ({
                     ) : (<div className="row mx-n2">
                         <div className="col-md-4 px-2">
                             <Button
-                                label="Rename collection"
+                                label="Переименовать"
                                 handleClick={onRenameCollection}
                             />
                         </div>
                         <div className="col-md-4 px-2">   
                             <Button
-                                label="Empty collection"
+                                label="Очистить"
                                 handleClick={onEmptyCollection}
                             />
                         </div>

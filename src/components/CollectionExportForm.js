@@ -36,7 +36,7 @@ class CollectionExportForm extends Component {
                 className="btn btn-primary btn-block"
                 onClick={this.handleClick}
             >
-                Export as HTML
+                Экспорт в HTML
             </button>
             <form
                 action="https://codepen.io/pen/define"
