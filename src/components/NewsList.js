@@ -11,7 +11,7 @@ const NewsList = ({ newsList, onRemove }) => {
                 return <div className="col-lg-4" key={id}>
                     <News
                         news={news}
-                        onClick={onRemove}
+                        onClick={() => onRemove(news)}
                     />
                 </div>
             })}

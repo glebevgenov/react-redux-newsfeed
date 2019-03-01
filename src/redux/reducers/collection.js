@@ -4,7 +4,7 @@ export default (state = null, action) => {
     return produce(state, draft => {
         switch (action.type) {
             case 'add_news_to_collection':
-                draft.newsList[action.id] = action.news;
+                draft.newsList[action.news.id] = action.news;
                 break;
             case 'remove_news_from_collection':
                 delete draft.newsList[action.id];
