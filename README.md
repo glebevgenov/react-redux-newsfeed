@@ -2,9 +2,9 @@
 
 [https://react-redux-newsfeed.glebevgenov.ru](https://react-redux-newsfeed.glebevgenov.ru)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Setup
 
-# Setup & run
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
