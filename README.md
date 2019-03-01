@@ -1,6 +1,6 @@
 # Demo
 
-[https://react-redux-newsfeed.glebevgenov.ru](https://react-redux-newsfeed.glebevgenov.ru){:target="_blank"}
+<a href="https://react-redux-newsfeed.glebevgenov.ru" target="_blank">https://react-redux-newsfeed.glebevgenov.ru</a>
 
 # Setup
 
