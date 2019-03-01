@@ -14,16 +14,18 @@ const App = ({ news, onClick}) => {
                         onClick={() => onClick(news)}
                     />
                     <div className="card">
-                        <div className="card-body">
-                            <div className="card-title">
-                                Послдняя новость
-                            </div>
-                            <div className="card-subtitle mb-2 text-muted">
-                                NewsAPI
-                            </div>
-                            <p className="small">
-                                Отображает последнюю новость позволяя добавлять и удалять ее из ленты по щелчку. Новость обновляется через 15 с.
-                            </p>
+                        <div className="card-body small">
+                            <ul>
+                                <li>
+                                    отображает последнюю новость от новостного API
+                                </li>
+                                <li>
+                                    обновление происходит через 15 с.
+                                </li>
+                                <li>
+                                    по щелчку новость попадает в ленту справа
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
