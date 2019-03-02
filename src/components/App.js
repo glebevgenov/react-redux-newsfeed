@@ -9,18 +9,17 @@ const App = ({ news, onClick}) => {
         <div className="App container my-5">
             <div className="row">
                 <div className="col-lg-3">
-                    <News
-                        news={news}
-                        onClick={() => onClick(news)}
-                    />
                     <div className="card">
-                        <div className="card-body small">
-                            <ul>
+                        <div className="card-body">
+                            <div className="card-title">
+                                Лента новостей
+                            </div>
+                            <ul className="small">
                                 <li>
                                     отображает последнюю новость от новостного API
                                 </li>
                                 <li>
-                                    обновление происходит через 15 с.
+                                    обновление новости происходит через 15 с.
                                 </li>
                                 <li>
                                     по щелчку новость попадает в ленту справа
@@ -28,6 +27,10 @@ const App = ({ news, onClick}) => {
                             </ul>
                         </div>
                     </div>
+                    <News
+                        news={news}
+                        onClick={() => onClick(news)}
+                    />
                 </div>
                 <div className="col-lg-9">
                     <Collection />
