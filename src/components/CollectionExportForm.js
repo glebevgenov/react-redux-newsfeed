@@ -33,7 +33,7 @@ class CollectionExportForm extends Component {
     render() {
         return <React.Fragment>
             <button 
-                className="btn btn-light btn-block"
+                className="btn btn-primary btn-block"
                 onClick={this.handleClick}
             >
                 Экспорт в HTML

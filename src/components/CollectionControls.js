@@ -12,7 +12,7 @@ const CollectionControls = ({
     onEmptyCollection,
 }) => {
     return (
-        <div className="card bg-dark text-light form-group">
+        <div className="card form-group">
             <div className="card-body row d-flex flex-row">
                 <div className="col-md-4 align-self-center">{name}</div>
                 <div className="col-md-8 align-self-center">

@@ -9,7 +9,7 @@ const App = ({ news, onClick}) => {
         <div className="App container my-5">
             <div className="row">
                 <div className="col-lg-3">
-                    <div className="card mb-2 bg-dark text-light">
+                    <div className="card mb-2">
                         <div className="card-body">
                             <div className="card-title">
                                 Лента новостей
